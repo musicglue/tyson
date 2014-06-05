@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency("omniauth-music_glue", [">= 0.1.0"])
+  spec.add_runtime_dependency('warden')
   spec.add_runtime_dependency("sinatra", ["~> 1.0"])
   spec.add_runtime_dependency("rack", ["~> 1.0"])
 

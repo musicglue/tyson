@@ -1,7 +1,6 @@
 require 'sinatra/base'
 
-module MusicGlue
-  class Tyson::Middleware < Sinatra::Base
+class MusicGlue::Tyson::Middleware < Sinatra::Base
 
   enable :raise_errors
   disable :show_exceptions
@@ -13,12 +12,12 @@ module MusicGlue
       # super is not called; we're not using sinatra if we're disabled
     else
       super(app)
-      @musicglue_only = extract_option(options, :musicglue_only, false)
+      @musicglue_only = options[:musicglue_only] || false
     end
   end
 
   def call(env)
-    if @disabled || skip?(env)
+    if @disabled
       @app.call(env)
     else
       super(env)
@@ -28,4 +27,5 @@ module MusicGlue
   get '/test-uri' do
     binding.pry
   end
+
 end
