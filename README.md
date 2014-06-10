@@ -1,6 +1,6 @@
 # MusicGlue::Tyson
 
-![Mike Tyson]('http://www.returnofkings.com/wp-content/uploads/2014/01/tyson-2.jpg')
+![Mike Tyson](http://www.returnofkings.com/wp-content/uploads/2014/01/tyson-2.jpg)
 
 ## Installation Instructions
 
