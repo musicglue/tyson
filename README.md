@@ -1,29 +1,26 @@
 # MusicGlue::Tyson
 
-TODO: Write a gem description
+![Mike Tyson]('http://www.returnofkings.com/wp-content/uploads/2014/01/tyson-2.jpg')
 
-## Installation
+## Installation Instructions
 
-Add this line to your application's Gemfile:
+Stick this in your rails `application.rb` pipe and smoke it
 
-    gem 'music_glue-tyson'
+```ruby
+config.middleware.insert_after ActionDispatch::Flash, ::MusicGlue::Tyson,
+        oauth: { id: ENV['OAUTH_ID'], secret: ENV['OAUTH_SECRET'], oauth_options: { provider_ignores_state: true } }
+```
 
-And then execute:
+The two ENV params you will have to get from the user-accounts application, by setting up a new application /oauth/applications
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install music_glue-tyson
+Only MG employees will have access to that endpoint.
 
 ## Usage
 
-TODO: Write usage instructions here
+Tyson provides a `MusicGlue::Tyson::User` instance after it retrieves some basic credentials from the api in the `env['warden'].user` variable. It's up to you to decide how you want to decorate this. Either bind it to a local represetnation in your own database with permissions etc, or just use it as is.
 
-## Contributing
+## TODO
 
-1. Fork it ( https://github.com/[my-github-username]/music_glue-tyson/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+ - Logout
+ - SSO Log Out
+
