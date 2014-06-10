@@ -1,6 +1,6 @@
 # MusicGlue::Tyson
 
-![Mike Tyson](http://www.returnofkings.com/wp-content/uploads/2014/01/tyson-2.jpg)
+![Mike Tyson](http://i.telegraph.co.uk/multimedia/archive/02362/mike-tyson_1_2362178b.jpg)
 
 ## Installation Instructions
 
