@@ -13,6 +13,8 @@ config.middleware.insert_after ActionDispatch::Flash, ::MusicGlue::Tyson,
 
 The two ENV params you will have to get from the user-accounts application, by setting up a new application /oauth/applications
 
+Once you've done that, you'll need to call authenticate! wherever you want to trigger the middleware
+
 You will also have to set `ENV["MUSIC_GLUE_AUTH_URL"]` if you are running this in a non-production environment
 
 Only MG employees will have access to that endpoint.
@@ -25,4 +27,5 @@ Tyson provides a `MusicGlue::Tyson::User` instance after it retrieves some basic
 
  - Logout
  - SSO Log Out
+ - MG Only Applications
 
