@@ -1,3 +1,4 @@
+$:.unshift File.expand_path('../lib', __FILE__)
 # define Heroku and Heroku::Bouncer
 module MusicGlue
   class Tyson

@@ -24,8 +24,9 @@ class MusicGlue::Tyson::Middleware < Sinatra::Base
     end
   end
 
-  get '/test-uri' do
-    binding.pry
+  get '/auth/music_glue/callback' do
+    env['warden'].authenticate!
+    redirect(session['user.return_to'] || '/')
   end
 
 end
