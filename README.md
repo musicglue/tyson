@@ -13,6 +13,8 @@ config.middleware.insert_after ActionDispatch::Flash, ::MusicGlue::Tyson,
 
 The two ENV params you will have to get from the user-accounts application, by setting up a new application /oauth/applications
 
+You will also have to set `ENV["MUSIC_GLUE_AUTH_URL"]` if you are running this in a non-production environment
+
 Only MG employees will have access to that endpoint.
 
 ## Usage
