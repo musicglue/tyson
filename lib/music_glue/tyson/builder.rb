@@ -45,15 +45,6 @@ class MusicGlue::Tyson::Builder
     builder
   end
 
-  def self.user_authenticator
-    if @user_authenticator
-      @user_authenticator
-    else
-      ->(auth_hash, env) {
-        raise 'Missing user_authenticator method'
-      }
-    end
-  end
 
   def self.extract_options!(options)
     oauth = options[:oauth] || {}
