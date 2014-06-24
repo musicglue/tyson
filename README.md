@@ -25,7 +25,7 @@ Tyson provides a `MusicGlue::Tyson::User` instance after it retrieves some basic
 
 ## TODO
 
- - Logout
- - SSO Log Out
- - MG Only Applications
+ - ~~Logout~~
+ - ~~SSO Log Out~~
+ - ~~MG Only Applications~~
 
