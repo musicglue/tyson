@@ -26,5 +26,16 @@ class MusicGlue::Tyson::User
   def expiry_time
     Time.at expires_at
   end
+  
+  def to_s
+    out = []
+    if first_name && last_name
+      out << first_name
+      out << last_name
+    else
+      out << email
+    end
+    out.join(' ')
+  end
 
 end
