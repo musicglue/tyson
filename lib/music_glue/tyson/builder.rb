@@ -14,14 +14,15 @@ class MusicGlue::Tyson::Builder
     builder = ::Rack::Builder.new
     warden_stratagies   = options[:warden_stratagies] || [:omniauth]
     warden_failure_app  = options[:failure_app]       || MusicGlue::Tyson::MissingAuthentication
-
     @user_authenticator = options[:user_authenticator]
 
     oauth_id, oauth_secret, oauth_options = extract_options!(options)
+
     unless options[:disabled]
       builder.use OmniAuth::Builder do
         provider :music_glue, oauth_id, oauth_secret, oauth_options
       end
+
       builder.use(Rack::Session::Cookie, :secret => "COOKIES") unless defined?('RailsWarden')
 
       builder.use warden_manager do |manager|
@@ -52,11 +53,24 @@ class MusicGlue::Tyson::Builder
     id, secret = oauth[:id], oauth[:secret]
 
     if id.nil? || secret.nil? || id.empty? || secret.empty?
-      $stderr.puts "[FATAL] music_glue-tyson disabled, missing variables"
+      if options[:fail_without_config]
+        fail 'music_glue-tyson requires :id and :secret oauth options in this environment.'
+      else
+        logger.warn "music_glue-tyson is disabled because it's :id or :secret oauth options are missing."
+      end
+
       options[:disabled] = true
     end
 
     [id, secret, oauth_options]
+  end
+
+  def self.logger
+    @logger ||= if defined?('Rails')
+      Rails.logger
+    else
+      Logger.new STDOUT
+    end
   end
 
   def self.warden_manager
