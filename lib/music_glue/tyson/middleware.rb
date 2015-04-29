@@ -13,6 +13,7 @@ class MusicGlue::Tyson::Middleware < Sinatra::Base
       # super is not called; we're not using sinatra if we're disabled
     else
       @cookie_options = { domain: '.musicglue.com', path: '/' }
+      @cookie_options.delete(:domain) if options[:disable_cookie_domain_scope]
       super(app)
       @musicglue_only = options[:musicglue_only] || false
     end
