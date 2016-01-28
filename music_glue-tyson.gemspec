@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "music_glue-tyson"
-  spec.version       = '0.0.1'
+  spec.version       = '0.1.0'
   spec.authors       = ["Adam Carlile"]
   spec.email         = ["adam@benchmedia.co.uk"]
   spec.summary       = %q{SSO component}
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('warden_omniauth')
   spec.add_runtime_dependency("sinatra", ["~> 1.0"])
   spec.add_runtime_dependency('activemodel')
-  spec.add_runtime_dependency("rack", ["~> 1.0"])
+  spec.add_runtime_dependency("rack", [">= 1.0"])
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
