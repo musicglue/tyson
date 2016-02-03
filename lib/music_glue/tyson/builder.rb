@@ -65,11 +65,11 @@ class MusicGlue::Tyson::Builder
   end
 
   def self.logger
-    @logger ||= if defined?('Rails')
-      Rails.logger
-    else
-      Logger.new STDOUT
-    end
+    @logger ||= Logger.new STDOUT
+  end
+
+  def self.logger logger
+    @logger = logger
   end
 
   def self.warden_manager
