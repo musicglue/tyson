@@ -24,8 +24,6 @@ class MusicGlue::Tyson::Builder
         provider :music_glue, oauth_id, oauth_secret, oauth_options
       end
 
-      builder.use(Rack::Session::Cookie, :secret => cookie_secret) unless Object.const_defined?('RailsWarden')
-
       builder.use warden_manager do |manager|
         manager.default_strategies warden_stratagies
         manager.failure_app = warden_failure_app
