@@ -14,15 +14,17 @@ class MusicGlue::Tyson::Builder
     warden_stratagies   = options[:warden_stratagies] || [:omniauth]
     warden_failure_app  = options[:failure_app]       || MusicGlue::Tyson::MissingAuthentication
     @user_authenticator = options[:user_authenticator]
+    cookie_secret       = options.fetch(:cookie_secret) { 'COOKIES' }
+    logger              = options.fetch(:logger) { Logger.new STDOUT }
 
-    oauth_id, oauth_secret, oauth_options = extract_options!(options)
+    oauth_id, oauth_secret, oauth_options = extract_options!(options, logger)
 
     unless options[:disabled]
       builder.use OmniAuth::Builder do
         provider :music_glue, oauth_id, oauth_secret, oauth_options
       end
 
-      builder.use(Rack::Session::Cookie, :secret => "COOKIES") unless defined?('RailsWarden')
+      builder.use(Rack::Session::Cookie, :secret => cookie_secret) unless defined?('RailsWarden')
 
       builder.use warden_manager do |manager|
         manager.default_strategies warden_stratagies
@@ -46,7 +48,7 @@ class MusicGlue::Tyson::Builder
   end
 
 
-  def self.extract_options!(options)
+  def self.extract_options!(options, logger)
     oauth = options[:oauth] || {}
     oauth_options = options[:oauth_options] || {}
     id, secret = oauth[:id], oauth[:secret]
@@ -62,14 +64,6 @@ class MusicGlue::Tyson::Builder
     end
 
     [id, secret, oauth_options]
-  end
-
-  def self.logger
-    @logger ||= Logger.new STDOUT
-  end
-
-  def self.logger logger
-    @logger = logger
   end
 
   def self.warden_manager
