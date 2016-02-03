@@ -1,6 +1,5 @@
 require 'rack/builder'
 require 'warden'
-require 'rails_warden' if defined?('Rails')
 require 'omniauth-music_glue'
 
 require 'music_glue/tyson/middleware'
